@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pranesh V - Portfolio</title>
+    <meta name="description"
+        content="Portfolio of Pranesh V, high-impact software developer and B.Tech Information Technology student. Showcasing AI, computer vision, and distributed systems projects.">
+    <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Montserrat:wght@300;400;600;700&family=Bebas+Neue&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="batman-theme"> <!-- Default to Batman Theme -->
+
+    <!-- SVG Clip Paths -->
+    <svg width="0" height="0" style="position: absolute;">
+        <defs>
+            <clipPath id="batman-shape" clipPathUnits="objectBoundingBox">
+                <path d="M 0.5 0.95 
+                         C 0.35 0.9 0.1 0.7 0.05 0.45 
+                         C 0.1 0.55 0.25 0.6 0.35 0.45 
+                         C 0.25 0.3 0.1 0.2 0.05 0.05 
+                         C 0.25 0.1 0.4 0.15 0.46 0.05 
+                         L 0.48 0.1 C 0.49 0.15 0.51 0.15 0.52 0.1 
+                         L 0.54 0.05 C 0.6 0.15 0.75 0.1 0.95 0.05 
+                         C 0.9 0.2 0.75 0.3 0.65 0.45 
+                         C 0.75 0.6 0.9 0.55 0.95 0.45 
+                         C 0.9 0.7 0.65 0.9 0.5 0.95 Z" />
+            </clipPath>
+        </defs>
+    </svg>
+
+    <!-- Custom Cursor -->
+    <div id="custom-cursor"></div>
+
+    <!-- Theme Switcher -->
+    <div class="theme-switch-wrapper">
+        <label class="theme-switch" for="checkbox">
+            <input type="checkbox" id="checkbox" />
+            <div class="slider round">
+                <i class="fas fa-bat fa-bat-icon"
+                    style="position: absolute; left: 8px; top: 10px; font-size: 14px; color: #f0c330; z-index: 10;"></i>
+                <i class="fas fa-bolt fa-superman-icon"
+                    style="position: absolute; right: 8px; top: 10px; font-size: 14px; color: #fff; z-index: 10;"></i>
+            </div>
+        </label>
+        <span class="theme-label" id="theme-label">DARK MODE</span>
+    </div>
+
+    <!-- Background Elements -->
+    <div class="bg-effects">
+        <div class="emblem-bg"></div>
+        <div class="floating-logos">
+            <i class="fab fa-java logobg logo-1"></i>
+            <i class="fab fa-python logobg logo-2"></i>
+            <i class="fab fa-linux logobg logo-3"></i>
+            <i class="fas fa-database logobg logo-4"></i>
+            <i class="fas fa-code logobg logo-5"></i>
+            <i class="fas fa-network-wired logobg logo-6"></i>
+            <i class="fas fa-shield-alt logobg logo-7"></i>
+            <i class="fas fa-laptop-code logobg logo-8"></i>
+        </div>
+    </div>
+
+    <div id="content-wrapper">
+        <header>
+            <div class="container hero-section flex-hero">
+                <div class="profile-wrapper">
+                    <img src="profile.jpg" alt="Pranesh V" class="profile-pic">
+                </div>
+                <div class="hero-content">
+                    <h1 class="glitch" data-text="Pranesh V">Pranesh V</h1>
+                    <h2 class="subtitle">High-impact software developer & B.Tech IT student.</h2>
+                    <p class="summary">
+                        Empowered by a strong foundation in core computer science principles and driven by a passion for
+                        solving
+                        complex algorithmic challenges. From AI to distributed systems, I build tools that make an
+                        impact.
+                    </p>
+                    <div class="hero-actions">
+                        <a href="PRANESH_VSBEC.pdf" class="btn primary-btn" target="_blank">
+                            <i class="fas fa-file-pdf"></i> Download Resume
+                        </a>
+                        <a href="#projects" class="btn secondary-btn">View My Mission</a>
+                    </div>
+                    <div class="social-links">
+                        <a href="https://github.com/White-fang10" target="_blank"><i class="fab fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/pranesh-v-0451b0314" target="_blank"><i
+                                class="fab fa-linkedin"></i></a>
+                        <a href="#" target="_blank"><i class="fas fa-code"></i></a> <!-- Leetcode -->
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <section id="skills" class="container">
+                <h2 class="section-title">Arsenal of Skills</h2>
+                <div class="skills-grid">
+                    <div class="skill-card">
+                        <div class="skill-icon"><i class="fas fa-laptop-code"></i></div>
+                        <h3>Programming & Core CS</h3>
+                        <p>Java (focused on DSA: binary trees, linked lists, string manipulation), Python.</p>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-icon"><i class="fas fa-network-wired"></i></div>
+                        <h3>Big Data & Distributed Systems</h3>
+                        <p>Hadoop, HDFS, MapReduce, Distributed algorithms (Lamport's, Ricart-Agrawala).</p>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-icon"><i class="fas fa-brain"></i></div>
+                        <h3>AI & Machine Learning</h3>
+                        <p>Computer vision, local AI model deployment & hardware optimization (DeepSeek via Ollama).</p>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-icon"><i class="fas fa-shield-alt"></i></div>
+                        <h3>Cybersecurity & QA</h3>
+                        <p>Ethical hacking (Kali Linux), software testing methodologies (black/white box, path,
+                            performance).</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="projects" class="container">
+                <h2 class="section-title">Featured Directives</h2>
+
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <h4>InvestiGator</h4>
+                        <p>Full-Stack Developer<br>
+                            A dual-purpose financial application combining a comprehensive multi-asset portfolio tracker
+                            (Crypto, Stocks, Mutual Funds, Commodities, FDs) with a live-data paper trading simulator.
+                            Bridges the gap between personal wealth management and financial literacy safely.</p>
+                        <div class="tech-stack"><span>Java</span><span>WebSockets</span><span>REST
+                                APIs</span><span>Databases</span></div>
+                    </div>
+                    <div class="project-card">
+                        <h4>CV & ML-Powered Automated Monitoring</h4>
+                        <p>Spearheading an automated system leveraging Computer Vision and Machine Learning for
+                            attendance
+                            tracking and classroom engagement monitoring.</p>
+                        <div class="tech-stack"><span>Computer Vision</span><span>Machine Learning</span></div>
+                    </div>
+                    <div class="project-card">
+                        <h4>Deep Fake Awareness</h4>
+                        <p>Conducted comprehensive research and delivered presentations on the ethical implications of
+                            AI
+                            technologies and responsible usage.</p>
+                        <div class="tech-stack"><span>AI Ethics</span><span>Research</span></div>
+                    </div>
+                    <div class="project-card">
+                        <h4>DDoS & Phishing Attack Mitigation</h4>
+                        <p>Investigated cybersecurity vulnerabilities and executed in-depth analysis to propose
+                            effective
+                            mitigation strategies.</p>
+                        <div class="tech-stack"><span>Cybersecurity</span><span>Analysis</span></div>
+                    </div>
+                    <div class="project-card">
+                        <h4>Smart Energy Optimizer for EVs</h4>
+                        <p>Engineered an AI-driven solution to optimize energy consumption in electric vehicles,
+                            emphasizing
+                            sustainable technology initiatives.</p>
+                        <div class="tech-stack"><span>AI</span><span>Sustainable Tech</span></div>
+                    </div>
+                    <div class="project-card">
+                        <h4>Project Shield (Grid Guardians)</h4>
+                        <p>Architected an intelligent disaster management platform for KSEBL using ESP32 sensors and ML
+                            for
+                            LT line breakage detection.</p>
+                        <div class="tech-stack"><span>IoT / ESP32</span><span>Machine Learning</span></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="leadership" class="container">
+                <h2 class="section-title">Leadership & Command</h2>
+                <div class="leadership-grid"
+                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+                    <div class="leadership-card">
+                        <h3>Department Coordinator - SIH</h3>
+                        <p>Served as the department coordinator for the Smart India Hackathon. Facilitated team
+                            formations, guided project ideations, and managed departmental communications and operations
+                            for the national-level event.</p>
+                    </div>
+                    <div class="leadership-card">
+                        <h3>Kanal'26 - Coordinator & Department Editor</h3>
+                        <p>Actively organized and managed this technical symposium. Demonstrated core soft skills in
+                            teamwork,
+                            event execution, and leadership under pressure.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <div class="container footer-content">
+                <p>&copy; 2026 Pranesh V. All systems operational.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
