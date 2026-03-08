@@ -209,6 +209,45 @@
         </footer>
     </div>
 
+    <!-- ========== CHATBOT WIDGET ========== -->
+    <!-- Floating trigger button -->
+    <div id="chatbot-fab" title="Chat with me!" style="opacity:0;">
+        <span class="chatbot-label">💬 Ask me anything!</span>
+        <img id="chatbot-fab-avatar" src="batman-bot.png" alt="Chat Bot Avatar">
+        <span class="chatbot-pulse"></span>
+    </div>
+
+    <!-- Chat window -->
+    <div id="chatbot-window" class="chatbot-hidden">
+        <div id="chatbot-header">
+            <img id="chatbot-header-avatar" src="batman-bot.png" alt="Bot">
+            <div class="chatbot-header-info">
+                <span id="chatbot-name">Dark Knight AI</span>
+                <span class="chatbot-status">● Online</span>
+            </div>
+            <button id="chatbot-close" aria-label="Close chat">✕</button>
+        </div>
+
+        <div id="chatbot-messages" role="log" aria-label="Chat messages"></div>
+
+        <!-- Quick-reply chips -->
+        <div id="chatbot-chips">
+            <button class="chip">👋 Who are you?</button>
+            <button class="chip">🛠️ Skills</button>
+            <button class="chip">🚀 Projects</button>
+            <button class="chip">🎓 Education</button>
+            <button class="chip">📬 Contact</button>
+        </div>
+
+        <div id="chatbot-input-area">
+            <input id="chatbot-input" type="text" placeholder="Ask me anything…" autocomplete="off" maxlength="200">
+            <button id="chatbot-send" aria-label="Send message">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+    <!-- ===================================== -->
+
     <script src="script.js"></script>
 </body>
 
