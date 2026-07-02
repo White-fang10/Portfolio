@@ -4,220 +4,598 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pranesh V - Portfolio</title>
-    <meta name="description"
-        content="Portfolio of Pranesh V, high-impact software developer and B.Tech Information Technology student. Showcasing AI, computer vision, and distributed systems projects.">
+    <title>Pranesh V — Full Stack Developer & IT Engineer</title>
+    <meta name="description" content="Portfolio of Pranesh V — Full Stack Developer, AI/ML enthusiast, and B.Tech IT student at V.S.B Engineering College. Explore projects like Hawk AI, Investigator, ClarifAI, and more.">
+    <meta name="keywords" content="Pranesh V, portfolio, full stack developer, AI, machine learning, React, Node.js, Python, Java">
+    <meta property="og:title" content="Pranesh V — Portfolio">
+    <meta property="og:description" content="Full Stack Developer & AI/ML enthusiast building impactful software.">
     <link rel="stylesheet" href="style.css">
-    <!-- Font Awesome for icons -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 
-<body class="batman-theme"> <!-- Default to Batman Theme -->
+<body class="batman-theme">
 
     <!-- SVG Clip Paths -->
     <svg width="0" height="0" style="position: absolute;">
         <defs>
             <clipPath id="batman-shape" clipPathUnits="objectBoundingBox">
-                <path d="M 0.5 0.95 
-                         C 0.35 0.9 0.1 0.7 0.05 0.45 
-                         C 0.1 0.55 0.25 0.6 0.35 0.45 
-                         C 0.25 0.3 0.1 0.2 0.05 0.05 
-                         C 0.25 0.1 0.4 0.15 0.46 0.05 
-                         L 0.48 0.1 C 0.49 0.15 0.51 0.15 0.52 0.1 
-                         L 0.54 0.05 C 0.6 0.15 0.75 0.1 0.95 0.05 
-                         C 0.9 0.2 0.75 0.3 0.65 0.45 
-                         C 0.75 0.6 0.9 0.55 0.95 0.45 
-                         C 0.9 0.7 0.65 0.9 0.5 0.95 Z" />
+                <path d="M 0.3562 0.6295 C 0.3203 0.5627 0.1928 0.5752 0.2843 0.7318 0.0000 0.5627 0.0719 0.3333 0.2810 0.2222 0.2386 0.3016 0.2876 0.3538 0.4444 0.3684 0.4510 0.3490 0.4542 0.3294 0.4608 0.3099 0.4641 0.3127 0.4673 0.3156 0.4706 0.3183 0.4706 0.3183 0.4902 0.3162 0.5000 0.3162 0.5098 0.3162 0.5294 0.3183 0.5294 0.3183 0.5327 0.3156 0.5359 0.3127 0.5392 0.3099 0.5458 0.3294 0.5490 0.3490 0.5556 0.3684 0.7124 0.3538 0.7614 0.3016 0.7190 0.2222 0.9281 0.3333 1.0000 0.5627 0.7157 0.7318 0.8072 0.5752 0.6797 0.5627 0.6438 0.6295 0.5915 0.5710 0.5294 0.5689 0.5000 0.7778 0.4706 0.5689 0.4085 0.5710 0.3562 0.6295 Z" />
             </clipPath>
         </defs>
     </svg>
 
     <!-- Custom Cursor -->
     <div id="custom-cursor"></div>
+    <div id="cursor-follower"></div>
 
-    <!-- Theme Switcher -->
-    <div class="theme-switch-wrapper">
-        <label class="theme-switch" for="checkbox">
-            <input type="checkbox" id="checkbox" />
-            <div class="slider round">
-                <i class="fas fa-bat fa-bat-icon"
-                    style="position: absolute; left: 8px; top: 10px; font-size: 14px; color: #f0c330; z-index: 10;"></i>
-                <i class="fas fa-bolt fa-superman-icon"
-                    style="position: absolute; right: 8px; top: 10px; font-size: 14px; color: #fff; z-index: 10;"></i>
+    <!-- ======== NAVBAR ======== -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#hero" class="nav-logo" id="nav-logo-link">
+                <span class="logo-text">P</span><span class="logo-accent">V</span>
+            </a>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#experience" class="nav-link">Experience</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#achievements" class="nav-link">Achievements</a></li>
+                <li><a href="#education" class="nav-link">Education</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="nav-right">
+                <!-- Theme Switcher -->
+                <div class="theme-switch-wrapper">
+                    <label class="theme-switch" for="checkbox">
+                        <input type="checkbox" id="checkbox" />
+                        <div class="slider round">
+                            <i class="fas fa-mask bat-icon" style="position:absolute;left:7px;top:9px;font-size:13px;color:#f0c330;z-index:10;"></i>
+                            <i class="fas fa-bolt bolt-icon" style="position:absolute;right:7px;top:9px;font-size:13px;color:#fff;z-index:10;"></i>
+                        </div>
+                    </label>
+                    <span class="theme-label" id="theme-label">DARK</span>
+                </div>
+                <!-- Hamburger -->
+                <button class="hamburger" id="hamburger" aria-label="Menu">
+                    <span></span><span></span><span></span>
+                </button>
             </div>
-        </label>
-        <span class="theme-label" id="theme-label">DARK MODE</span>
-    </div>
+        </div>
+    </nav>
 
     <!-- Background Elements -->
     <div class="bg-effects">
         <div class="emblem-bg"></div>
         <div class="floating-logos">
-            <i class="fab fa-java logobg logo-1"></i>
+            <i class="fab fa-react logobg logo-1"></i>
             <i class="fab fa-python logobg logo-2"></i>
-            <i class="fab fa-linux logobg logo-3"></i>
+            <i class="fab fa-node-js logobg logo-3"></i>
             <i class="fas fa-database logobg logo-4"></i>
             <i class="fas fa-code logobg logo-5"></i>
-            <i class="fas fa-network-wired logobg logo-6"></i>
+            <i class="fab fa-java logobg logo-6"></i>
             <i class="fas fa-shield-alt logobg logo-7"></i>
-            <i class="fas fa-laptop-code logobg logo-8"></i>
+            <i class="fab fa-linux logobg logo-8"></i>
+            <i class="fas fa-brain logobg logo-9"></i>
+            <i class="fas fa-microchip logobg logo-10"></i>
         </div>
     </div>
 
     <div id="content-wrapper">
-        <header>
+
+        <!-- ======== HERO ======== -->
+        <header id="hero">
             <div class="container hero-section flex-hero">
-                <div class="profile-wrapper">
-                    <img src="profile.jpg" alt="Pranesh V" class="profile-pic">
+                <div class="profile-wrapper" id="profile-wrapper">
+                    <div class="profile-ring"></div>
+                    <img src="profile.jpg" alt="Pranesh V" class="profile-pic base-pic">
+                    <img src="batman.png" alt="Batman" class="profile-pic hover-pic batman-pic">
+                    <img src="superman.png" alt="Superman" class="profile-pic hover-pic superman-pic">
                 </div>
-                <div class="hero-content">
+                <div class="hero-content" id="about">
+                    <div class="hero-tag">
+                        <span class="tag-dot"></span>
+                        <span>Available for opportunities</span>
+                    </div>
                     <h1 class="glitch" data-text="Pranesh V">Pranesh V</h1>
-                    <h2 class="subtitle">High-impact software developer & B.Tech IT student.</h2>
+                    <h2 class="subtitle">
+                        I build&nbsp;<span id="typing-text"></span><span class="typing-cursor">|</span>
+                    </h2>
                     <p class="summary">
-                        Empowered by a strong foundation in core computer science principles and driven by a passion for
-                        solving
-                        complex algorithmic challenges. From AI to distributed systems, I build tools that make an
-                        impact.
+                        Motivated and versatile IT undergraduate with hands-on experience in full-stack development,
+                        embedded systems, and intelligent application design. I translate complex problem statements into
+                        scalable, user-centric products — from AI-powered tools to real-time monitoring platforms.
                     </p>
+                    <!-- Quick Stats -->
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <span class="stat-num" data-target="5">0</span><span class="stat-suffix">+</span>
+                            <span class="stat-label">Projects</span>
+                        </div>
+                        <div class="stat-divider"></div>
+                        <div class="stat-item">
+                            <span class="stat-num" data-target="2">0</span>
+                            <span class="stat-suffix"> Patents</span>
+                            <span class="stat-label">Filed</span>
+                        </div>
+                        <div class="stat-divider"></div>
+                        <div class="stat-item">
+                            <span class="stat-num cgpa-num" data-target="7.93">0</span>
+                            <span class="stat-label">CGPA</span>
+                        </div>
+                    </div>
                     <div class="hero-actions">
-                        <a href="https://drive.google.com/file/d/1qC_5D1Uj1sW_ARTZdGv0n0olYie8w-Qt/view?usp=sharing"
-                            class="btn primary-btn" target="_blank">
-                            <i class="fas fa-eye"></i> View Resume
+                        <a href="https://drive.google.com/file/d/1g83NPNC1Ti2-DgVSGLEd9N0yW2lpXK8S/view?usp=drivesdk" class="btn primary-btn" target="_blank" id="resume-btn">
+                            <i class="fas fa-file-download"></i> View Resume
                         </a>
-                        <a href="#projects" class="btn secondary-btn">View My Mission</a>
+                        <a href="#projects" class="btn secondary-btn" id="projects-btn">
+                            <i class="fas fa-rocket"></i> View Projects
+                        </a>
                     </div>
                     <div class="social-links">
-                        <a href="https://github.com/White-fang10" target="_blank"><i class="fab fa-github"></i></a>
-                        <a href="https://www.linkedin.com/in/pranesh-v-0451b0314" target="_blank"><i
-                                class="fab fa-linkedin"></i></a>
-                        <a href="https://leetcode.com/u/praneshvenkidusamy/" target="_blank"><i
-                                class="fas fa-code"></i></a> <!-- Leetcode -->
+                        <a href="https://github.com/White-fang10/Portfolio" target="_blank" id="github-link" title="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/pranesh-v-0451b0314" target="_blank" id="linkedin-link" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://leetcode.com/u/praneshvenkidusamy/" target="_blank" id="leetcode-link" title="LeetCode"><i class="fas fa-code"></i></a>
+                        <a href="mailto:esppranesh@gmail.com" id="email-link" title="Email"><i class="fas fa-envelope"></i></a>
                     </div>
                 </div>
+            </div>
+            <div class="hero-scroll-indicator">
+                <span>Scroll</span>
+                <div class="scroll-line"></div>
             </div>
         </header>
 
         <main>
+
+            <!-- ======== SKILLS ======== -->
             <section id="skills" class="container">
-                <h2 class="section-title">Arsenal of Skills</h2>
-                <div class="skills-grid">
-                    <div class="skill-card">
-                        <div class="skill-icon"><i class="fas fa-laptop-code"></i></div>
-                        <h3>Programming & Core CS</h3>
-                        <p>Java (focused on DSA: binary trees, linked lists, string manipulation), Python.</p>
+                <div class="section-header">
+                    <h2 class="section-title">Arsenal of Skills</h2>
+                    <p class="section-sub">Technologies I wield to build impactful solutions</p>
+                </div>
+                <div class="skills-categories">
+                    <div class="skill-category-card reveal">
+                        <div class="skill-cat-icon"><i class="fas fa-code"></i></div>
+                        <h3>Languages</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">Java</span>
+                            <span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag">C</span>
+                            <span class="skill-tag">SQL</span>
+                        </div>
                     </div>
-                    <div class="skill-card">
-                        <div class="skill-icon"><i class="fas fa-network-wired"></i></div>
-                        <h3>Big Data & Distributed Systems</h3>
-                        <p>Hadoop, HDFS, MapReduce, Distributed algorithms (Lamport's, Ricart-Agrawala).</p>
+                    <div class="skill-category-card reveal">
+                        <div class="skill-cat-icon"><i class="fas fa-layer-group"></i></div>
+                        <h3>Web & Frameworks</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">React.js</span>
+                            <span class="skill-tag">Node.js</span>
+                            <span class="skill-tag">Express.js</span>
+                            <span class="skill-tag">HTML5</span>
+                            <span class="skill-tag">CSS3</span>
+                            <span class="skill-tag">REST APIs</span>
+                            <span class="skill-tag">WebSockets</span>
+                        </div>
                     </div>
-                    <div class="skill-card">
-                        <div class="skill-icon"><i class="fas fa-brain"></i></div>
-                        <h3>AI & Machine Learning</h3>
-                        <p>Computer vision, local AI model deployment & hardware optimization (DeepSeek via Ollama).</p>
+                    <div class="skill-category-card reveal">
+                        <div class="skill-cat-icon"><i class="fas fa-brain"></i></div>
+                        <h3>AI & Data</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Computer Vision</span>
+                            <span class="skill-tag">OpenCV</span>
+                            <span class="skill-tag">Deep Learning</span>
+                            <span class="skill-tag">RAG / LLMs</span>
+                            <span class="skill-tag">Hadoop</span>
+                            <span class="skill-tag">MapReduce</span>
+                            <span class="skill-tag">HDFS</span>
+                        </div>
                     </div>
-                    <div class="skill-card">
-                        <div class="skill-icon"><i class="fas fa-shield-alt"></i></div>
-                        <h3>Cybersecurity & QA</h3>
-                        <p>Ethical hacking (Kali Linux), software testing methodologies (black/white box, path,
-                            performance).</p>
+                    <div class="skill-category-card reveal">
+                        <div class="skill-cat-icon"><i class="fas fa-tools"></i></div>
+                        <h3>Tools & Platforms</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Git & GitHub</span>
+                            <span class="skill-tag">VS Code</span>
+                            <span class="skill-tag">Postman</span>
+                            <span class="skill-tag">Linux</span>
+                            <span class="skill-tag">Arduino IDE</span>
+                            <span class="skill-tag">Kali Linux</span>
+                        </div>
+                    </div>
+                    <div class="skill-category-card reveal">
+                        <div class="skill-cat-icon"><i class="fas fa-microchip"></i></div>
+                        <h3>Embedded & IoT</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">ESP32</span>
+                            <span class="skill-tag">LoRa</span>
+                            <span class="skill-tag">GSM Modules</span>
+                            <span class="skill-tag">Sensor Integration</span>
+                            <span class="skill-tag">Firmware Dev</span>
+                        </div>
+                    </div>
+                    <div class="skill-category-card reveal">
+                        <div class="skill-cat-icon"><i class="fas fa-users"></i></div>
+                        <h3>Soft Skills</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Leadership</span>
+                            <span class="skill-tag">Problem Solving</span>
+                            <span class="skill-tag">Communication</span>
+                            <span class="skill-tag">Adaptability</span>
+                            <span class="skill-tag">Team Collaboration</span>
+                        </div>
                     </div>
                 </div>
             </section>
 
+            <!-- ======== EXPERIENCE ======== -->
+            <section id="experience" class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Experience</h2>
+                    <p class="section-sub">Real-world exposure to the full development lifecycle</p>
+                </div>
+                <!-- Wild Bugs Freelance -->
+                <div class="experience-card reveal">
+                    <div class="exp-left">
+                        <div class="exp-icon"><i class="fas fa-globe"></i></div>
+                    </div>
+                    <div class="exp-content">
+                        <div class="exp-header">
+                            <div>
+                                <h3 class="exp-title">Freelance Web Developer</h3>
+                                <span class="exp-company">
+                                    <a href="https://wild-bugs.vercel.app/" target="_blank" style="color: var(--primary); text-decoration: none; transition: color 0.3s;" id="wildbugs-link">Wild Bugs <i class="fas fa-external-link-alt" style="font-size: 0.8rem; margin-left: 4px;"></i></a>
+                                </span>
+                            </div>
+                            <div class="exp-meta">
+                                <span class="exp-date"><i class="fas fa-calendar-alt"></i> 2025 - Present</span>
+                                <span class="exp-location"><i class="fas fa-map-marker-alt"></i> Remote / Freelance</span>
+                            </div>
+                        </div>
+                        <ul class="exp-bullets">
+                            <li>Designed and developed the official, highly interactive landing page for Wild Bugs to establish a compelling brand presence.</li>
+                            <li>Built responsive web components utilizing modern frontend workflows, ensuring premium visual aesthetics and pixel-perfect layouts.</li>
+                            <li>Deployed and optimized the site structure on Vercel, achieving high performance scores and seamless asset delivery.</li>
+                        </ul>
+                        <div class="exp-tags">
+                            <span>React.js</span><span>Node.js</span><span>Vercel</span><span>Tailwind CSS</span><span>UI/UX</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="experience-card reveal">
+                    <div class="exp-left">
+                        <div class="exp-icon"><i class="fas fa-laptop-code"></i></div>
+                    </div>
+                    <div class="exp-content">
+                        <div class="exp-header">
+                            <div>
+                                <h3 class="exp-title">Full Stack Development Intern</h3>
+                                <span class="exp-company">Software Development Internship</span>
+                            </div>
+                            <div class="exp-meta">
+                                <span class="exp-date"><i class="fas fa-calendar-alt"></i> 2024</span>
+                                <span class="exp-location"><i class="fas fa-map-marker-alt"></i> Remote / India</span>
+                            </div>
+                        </div>
+                        <ul class="exp-bullets">
+                            <li>Developed and deployed web application modules using modern frontend and backend technologies, gaining practical exposure to the complete software development lifecycle.</li>
+                            <li>Collaborated with cross-functional teams to design RESTful APIs, integrate third-party services, and ensure responsive UI/UX across devices.</li>
+                            <li>Contributed to code reviews, documentation, and iterative feature development following Agile methodologies.</li>
+                        </ul>
+                        <div class="exp-tags">
+                            <span>React.js</span><span>Node.js</span><span>REST APIs</span><span>Agile</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ======== PROJECTS ======== -->
             <section id="projects" class="container">
-                <h2 class="section-title">Featured Directives</h2>
-
+                <div class="section-header">
+                    <h2 class="section-title">Featured Projects</h2>
+                    <p class="section-sub">End-to-end solutions built with purpose and precision</p>
+                </div>
                 <div class="projects-grid">
-                    <div class="project-card">
-                        <h4>InvestiGator</h4>
-                        <p>Full-Stack Developer<br>
-                            A dual-purpose financial application combining a comprehensive multi-asset portfolio tracker
-                            (Crypto, Stocks, Mutual Funds, Commodities, FDs) with a live-data paper trading simulator.
-                            Bridges the gap between personal wealth management and financial literacy safely.</p>
-                        <div class="tech-stack"><span>Java</span><span>WebSockets</span><span>REST
-                                APIs</span><span>Databases</span></div>
+
+                    <!-- Hawk AI -->
+                    <div class="project-card reveal">
+                        <div class="project-card-inner">
+                            <div class="project-number">01</div>
+                            <div class="project-icon-wrap"><i class="fas fa-eye"></i></div>
+                            <h4>Hawk AI</h4>
+                            <p class="project-desc">Patent-filed automated attendance management system powered by deep learning and facial recognition, operating through existing smart board cameras — zero additional hardware required. Achieves high accuracy under varied lighting conditions.</p>
+                            <div class="tech-stack">
+                                <span>Deep Learning</span><span>Computer Vision</span>
+                                <span>Python</span><span>OpenCV</span><span>CNN</span>
+                            </div>
+                            <div class="project-badge patent-badge"><i class="fas fa-certificate"></i> Patent Filed (2025)</div>
+                        </div>
                     </div>
-                    <div class="project-card">
-                        <h4>CV & ML-Powered Automated Monitoring</h4>
-                        <p>Spearheading an automated system leveraging Computer Vision and Machine Learning for
-                            attendance
-                            tracking and classroom engagement monitoring.</p>
-                        <div class="tech-stack"><span>Computer Vision</span><span>Machine Learning</span></div>
+
+                    <!-- Investigator -->
+                    <div class="project-card reveal">
+                        <div class="project-card-inner">
+                            <div class="project-number">02</div>
+                            <div class="project-icon-wrap"><i class="fas fa-chart-line"></i></div>
+                            <h4>Investigator</h4>
+                            <p class="project-desc">Comprehensive investment monitoring and simulation platform with multi-asset portfolio tracking, real-time market data dashboards, an AI-powered investment mentor for contextual insights, and a hypothetical investment simulator.</p>
+                            <div class="tech-stack">
+                                <span>React</span><span>Node.js</span><span>Live Market APIs</span>
+                                <span>AI Integration</span><span>Chart.js</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="project-card">
-                        <h4>Deep Fake Awareness</h4>
-                        <p>Conducted comprehensive research and delivered presentations on the ethical implications of
-                            AI
-                            technologies and responsible usage.</p>
-                        <div class="tech-stack"><span>AI Ethics</span><span>Research</span></div>
+
+                    <!-- ClarifAI -->
+                    <div class="project-card reveal">
+                        <div class="project-card-inner">
+                            <div class="project-number">03</div>
+                            <div class="project-icon-wrap"><i class="fas fa-robot"></i></div>
+                            <h4>ClarifAI</h4>
+                            <p class="project-desc">Production-ready RAG platform designed as an AI assistant for events, hackathons, and conferences. Enables high-accuracy, hallucination-free information retrieval using vector databases to semantically search event documents in natural language.</p>
+                            <div class="tech-stack">
+                                <span>RAG</span><span>Vector DB</span><span>LLM</span>
+                                <span>Python</span><span>Full Stack</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="project-card">
-                        <h4>DDoS & Phishing Attack Mitigation</h4>
-                        <p>Investigated cybersecurity vulnerabilities and executed in-depth analysis to propose
-                            effective
-                            mitigation strategies.</p>
-                        <div class="tech-stack"><span>Cybersecurity</span><span>Analysis</span></div>
+
+                    <!-- House -->
+                    <div class="project-card reveal">
+                        <div class="project-card-inner">
+                            <div class="project-number">04</div>
+                            <div class="project-icon-wrap"><i class="fas fa-hat-wizard"></i></div>
+                            <h4>House</h4>
+                            <p class="project-desc">Harry Potter–themed online competitive coding platform with fully immersive house-based team selection, real-time code execution engine supporting multiple languages, live contest timers, leaderboards, and lore-driven UX.</p>
+                            <div class="tech-stack">
+                                <span>React</span><span>Node.js</span><span>WebSockets</span>
+                                <span>Judge0 API</span><span>CSS Animations</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="project-card">
-                        <h4>Smart Energy Optimizer for EVs</h4>
-                        <p>Engineered an AI-driven solution to optimize energy consumption in electric vehicles,
-                            emphasizing
-                            sustainable technology initiatives.</p>
-                        <div class="tech-stack"><span>AI</span><span>Sustainable Tech</span></div>
+
+                    <!-- Project Shield -->
+                    <div class="project-card reveal">
+                        <div class="project-card-inner">
+                            <div class="project-number">05</div>
+                            <div class="project-icon-wrap"><i class="fas fa-bolt"></i></div>
+                            <h4>Project Shield</h4>
+                            <p class="project-desc">Intelligent disaster management platform for detecting LT electrical line failures using ESP32 IoT sensors and ML-based anomaly detection. Features a cloud-hosted real-time dashboard with automated GSM &amp; LoRa alert dispatching and remote circuit isolation.</p>
+                            <div class="tech-stack">
+                                <span>ESP32</span><span>Machine Learning</span><span>LoRa</span>
+                                <span>GSM</span><span>Cloud</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="project-card">
-                        <h4>Project Shield (Grid Guardians)</h4>
-                        <p>Architected an intelligent disaster management platform for KSEBL using ESP32 sensors and ML
-                            for
-                            LT line breakage detection.</p>
-                        <div class="tech-stack"><span>IoT / ESP32</span><span>Machine Learning</span></div>
+
+                    <!-- Space Debris -->
+                    <div class="project-card reveal">
+                        <div class="project-card-inner">
+                            <div class="project-number">06</div>
+                            <div class="project-icon-wrap"><i class="fas fa-satellite"></i></div>
+                            <h4>Space Debris Management</h4>
+                            <p class="project-desc">Computational model leveraging orbital tracking algorithms and predictive analytics to identify, catalogue, and mitigate risks posed by space debris to active satellites and future space missions.</p>
+                            <div class="tech-stack">
+                                <span>Orbital Mechanics</span><span>Predictive Analytics</span><span>Python</span>
+                            </div>
+                            <div class="project-badge patent-badge"><i class="fas fa-certificate"></i> Patent Filed (2024)</div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ======== ACHIEVEMENTS ======== -->
+            <section id="achievements" class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Achievements</h2>
+                    <p class="section-sub">Patents, certifications &amp; academic recognition</p>
+                </div>
+                <div class="achievements-grid">
+                    <div class="achievement-card reveal">
+                        <div class="achievement-icon"><i class="fas fa-award"></i></div>
+                        <div class="achievement-content">
+                            <div class="achievement-badge">Patent · 2024</div>
+                            <h3>Space Debris Management System</h3>
+                            <p>Filed an Indian patent for a computational model leveraging orbital tracking algorithms and predictive analytics to mitigate space debris risks to satellites.</p>
+                        </div>
+                    </div>
+                    <div class="achievement-card reveal">
+                        <div class="achievement-icon"><i class="fas fa-award"></i></div>
+                        <div class="achievement-content">
+                            <div class="achievement-badge">Patent · 2025</div>
+                            <h3>Hawk AI — Automated Attendance System</h3>
+                            <p>Filed an Indian patent for a deep learning–based attendance management solution using smart board cameras for real-time facial recognition — no manual roll calls needed.</p>
+                        </div>
+                    </div>
+                    <div class="achievement-card reveal">
+                        <div class="achievement-icon"><i class="fas fa-graduation-cap"></i></div>
+                        <div class="achievement-content">
+                            <div class="achievement-badge">NPTEL Certification</div>
+                            <h3>Java Programming</h3>
+                            <p>Completed NPTEL-certified course in Java Programming, demonstrating proficiency in industry-relevant technologies.</p>
+                        </div>
+                    </div>
+                    <div class="achievement-card reveal">
+                        <div class="achievement-icon"><i class="fas fa-graduation-cap"></i></div>
+                        <div class="achievement-content">
+                            <div class="achievement-badge">NPTEL Certification</div>
+                            <h3>Big Data Analysis</h3>
+                            <p>Completed NPTEL-certified course in Big Data Analysis covering Hadoop, HDFS, MapReduce, and large-scale data processing concepts.</p>
+                        </div>
+                    </div>
+                    <div class="achievement-card reveal">
+                        <div class="achievement-icon"><i class="fas fa-certificate"></i></div>
+                        <div class="achievement-content">
+                            <div class="achievement-badge">Board Certification</div>
+                            <h3>Data Science for Beginners</h3>
+                            <p>Completed Data Science certification reinforcing foundational knowledge in data analysis and visualization workflows.</p>
+                        </div>
                     </div>
                 </div>
             </section>
 
-            <section id="leadership" class="container">
-                <h2 class="section-title">Leadership & Command</h2>
-                <div class="leadership-grid"
-                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
-                    <div class="leadership-card">
-                        <h3>Department Coordinator - SIH</h3>
-                        <p>Served as the department coordinator for the Smart India Hackathon. Facilitated team
-                            formations, guided project ideations, and managed departmental communications and operations
-                            for the national-level event.</p>
+            <!-- ======== EDUCATION ======== -->
+            <section id="education" class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Education</h2>
+                    <p class="section-sub">The foundation of everything I build</p>
+                </div>
+                <div class="education-timeline">
+                    <div class="timeline-item reveal" id="edu-vsb">
+                        <div class="timeline-marker">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-line"></div>
+                        </div>
+                        <div class="timeline-card">
+                            <div class="timeline-header">
+                                <div>
+                                    <h3>V.S.B Engineering College</h3>
+                                    <span class="timeline-degree">B.Tech in Information Technology</span>
+                                    <span class="timeline-location"><i class="fas fa-map-marker-alt"></i> Karur, Tamil Nadu</span>
+                                </div>
+                                <div class="timeline-right">
+                                    <span class="timeline-year">2023 – 2027</span>
+                                    <div class="cgpa-display">
+                                        <span class="cgpa-label">CGPA</span>
+                                        <span class="cgpa-value">7.93</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="timeline-detail">Currently pursuing 4th year. Relevant coursework: Data Structures &amp; Algorithms, DBMS, Operating Systems, Computer Networks, Software Engineering, Web Technologies.</p>
+                        </div>
                     </div>
-                    <div class="leadership-card">
-                        <h3>Kanal'26 - Coordinator & Department Editor</h3>
-                        <p>Actively organized and managed this technical symposium. Demonstrated core soft skills in
-                            teamwork,
-                            event execution, and leadership under pressure.</p>
+                    <div class="timeline-item reveal">
+                        <div class="timeline-marker">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-line"></div>
+                        </div>
+                        <div class="timeline-card">
+                            <div class="timeline-header">
+                                <div>
+                                    <h3>Veveaham Matric Hr Sec School</h3>
+                                    <span class="timeline-degree">12th Standard (HSC)</span>
+                                    <span class="timeline-location"><i class="fas fa-map-marker-alt"></i> Dharapuram, Tamil Nadu</span>
+                                </div>
+                                <div class="timeline-right">
+                                    <span class="timeline-year">2022 – 2023</span>
+                                    <div class="cgpa-display">
+                                        <span class="cgpa-label">Score</span>
+                                        <span class="cgpa-value">78.3%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline-item reveal">
+                        <div class="timeline-marker">
+                            <div class="timeline-dot"></div>
+                        </div>
+                        <div class="timeline-card">
+                            <div class="timeline-header">
+                                <div>
+                                    <h3>Greenfield International School</h3>
+                                    <span class="timeline-degree">10th Standard (SSLC)</span>
+                                </div>
+                                <div class="timeline-right">
+                                    <span class="timeline-year">2020 – 2021</span>
+                                    <div class="cgpa-display">
+                                        <span class="cgpa-label">Score</span>
+                                        <span class="cgpa-value">68%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
+
+            <!-- ======== LEADERSHIP ======== -->
+            <section id="leadership" class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Leadership &amp; Command</h2>
+                    <p class="section-sub">Driving impact beyond code</p>
+                </div>
+                <div class="leadership-grid">
+                    <div class="leadership-card reveal">
+                        <div class="leadership-icon"><i class="fas fa-users-cog"></i></div>
+                        <h3>Department Coordinator — SIH</h3>
+                        <p>Served as the department coordinator for the Smart India Hackathon. Facilitated team formations, guided project ideations, and managed departmental communications for the national-level event.</p>
+                        <span class="leadership-tag">Smart India Hackathon</span>
+                    </div>
+                    <div class="leadership-card reveal">
+                        <div class="leadership-icon"><i class="fas fa-pen-nib"></i></div>
+                        <h3>Coordinator &amp; Department Editor — Kanal'26</h3>
+                        <p>Actively organized and managed this technical symposium. Demonstrated core soft skills in teamwork, event execution, and leadership under pressure as both coordinator and department editor.</p>
+                        <span class="leadership-tag">Technical Symposium</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ======== CONTACT ======== -->
+            <section id="contact" class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Let's Connect</h2>
+                    <p class="section-sub">Whether it's a project, opportunity, or just a hello — I'm all ears</p>
+                </div>
+                <div class="contact-wrapper">
+                    <div class="contact-card reveal">
+                        <div class="contact-glow"></div>
+                        <h3 class="contact-headline">Ready to build something <span class="accent-text">extraordinary</span>?</h3>
+                        <p class="contact-sub">I'm currently open to full-time roles, internships, and collaborative projects in full-stack development, AI/ML, and embedded systems.</p>
+                        <a href="mailto:esppranesh@gmail.com" class="contact-email-btn" id="contact-email-btn">
+                            <i class="fas fa-paper-plane"></i>
+                            esppranesh@gmail.com
+                        </a>
+                        <div class="contact-socials">
+                            <a href="https://github.com/White-fang10/Portfolio" target="_blank" class="contact-social-link" id="contact-github">
+                                <i class="fab fa-github"></i>
+                                <span>GitHub</span>
+                            </a>
+                            <a href="https://www.linkedin.com/in/pranesh-v-0451b0314" target="_blank" class="contact-social-link" id="contact-linkedin">
+                                <i class="fab fa-linkedin"></i>
+                                <span>LinkedIn</span>
+                            </a>
+                            <a href="https://leetcode.com/u/praneshvenkidusamy/" target="_blank" class="contact-social-link" id="contact-leetcode">
+                                <i class="fas fa-code"></i>
+                                <span>LeetCode</span>
+                            </a>
+                            <a href="tel:+918807149866" class="contact-social-link" id="contact-phone">
+                                <i class="fas fa-phone"></i>
+                                <span>+91 8807149866</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
         </main>
 
         <footer>
             <div class="container footer-content">
-                <p>&copy; 2026 Pranesh V. All systems operational.</p>
+                <p class="footer-text">
+                    <span class="footer-name">Pranesh V</span>
+                    &nbsp;·&nbsp; Crafted with <span class="footer-heart">♥</span> &nbsp;·&nbsp;
+                    &copy; 2026 All systems operational.
+                </p>
+                <p class="footer-quote" id="footer-quote">"The night is darkest just before the dawn."</p>
             </div>
         </footer>
     </div>
 
-    <!-- ========== CHATBOT WIDGET ========== -->
-    <!-- Floating trigger button -->
+    <!-- ======== CHATBOT WIDGET ======== -->
     <div id="chatbot-fab" title="Chat with me!" style="opacity:0;">
         <span class="chatbot-label">💬 Ask me anything!</span>
         <img id="chatbot-fab-avatar" src="batman-bot.png" alt="Chat Bot Avatar">
         <span class="chatbot-pulse"></span>
     </div>
 
-    <!-- Chat window -->
     <div id="chatbot-window" class="chatbot-hidden">
         <div id="chatbot-header">
             <img id="chatbot-header-avatar" src="batman-bot.png" alt="Bot">
@@ -227,18 +605,15 @@
             </div>
             <button id="chatbot-close" aria-label="Close chat">✕</button>
         </div>
-
         <div id="chatbot-messages" role="log" aria-label="Chat messages"></div>
-
-        <!-- Quick-reply chips -->
         <div id="chatbot-chips">
             <button class="chip">👋 Who are you?</button>
             <button class="chip">🛠️ Skills</button>
             <button class="chip">🚀 Projects</button>
             <button class="chip">🎓 Education</button>
+            <button class="chip">🏆 Patents</button>
             <button class="chip">📬 Contact</button>
         </div>
-
         <div id="chatbot-input-area">
             <input id="chatbot-input" type="text" placeholder="Ask me anything…" autocomplete="off" maxlength="200">
             <button id="chatbot-send" aria-label="Send message">
@@ -246,7 +621,6 @@
             </button>
         </div>
     </div>
-    <!-- ===================================== -->
 
     <script src="script.js"></script>
 </body>

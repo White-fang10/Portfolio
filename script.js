@@ -3,7 +3,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const themeToggle = document.getElementById('checkbox');
     const themeLabel = document.getElementById('theme-label');
     const customCursor = document.getElementById('custom-cursor');
+    const cursorFollower = document.getElementById('cursor-follower');
     const body = document.body;
+    const hamburger = document.getElementById('hamburger');
+    const navLinksList = document.getElementById('nav-links');
 
     // Create canvas for particles
     const canvas = document.createElement('canvas');
@@ -30,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
         wipe.classList.add('comic-wipe');
 
         // Use a stark comic color based on theme (Yellow for Gotham, Blue/Red for Metropolis)
-        const comicColor = isSuperman ? '#262626' : '#ed1d24'; // Opposite color of the current theme for high contrast "POW"
+        const comicColor = isSuperman ? '#080810' : '#c41230'; // Opposite color of the current theme for high contrast
         wipe.style.setProperty('--comic-bg', comicColor);
         document.body.appendChild(wipe);
 
@@ -43,12 +46,14 @@ document.addEventListener('DOMContentLoaded', () => {
             // Apply theme change when comic dots cover the screen
             if (e.target.checked) {
                 body.classList.add('superman-theme');
-                themeLabel.textContent = "LIGHT MODE";
+                themeLabel.textContent = "LIGHT";
                 isSuperman = true;
+                document.getElementById('footer-quote').textContent = "\"There is a superhero in all of us, we just need the courage to put on the cape.\"";
             } else {
                 body.classList.remove('superman-theme');
-                themeLabel.textContent = "DARK MODE";
+                themeLabel.textContent = "DARK";
                 isSuperman = false;
+                document.getElementById('footer-quote').textContent = "\"The night is darkest just before the dawn.\"";
             }
             createBurst(width / 2, height / 2, isSuperman);
 
@@ -62,32 +67,51 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 600); // Wait for the 'POW' expansion
     });
 
-    // Custom Cursor
+    // Custom Cursor tracking
+    let cursorX = 0, cursorY = 0;
+    let followerX = 0, followerY = 0;
+
     document.addEventListener('mousemove', (e) => {
-        customCursor.style.left = e.clientX + 'px';
-        customCursor.style.top = e.clientY + 'px';
+        cursorX = e.clientX;
+        cursorY = e.clientY;
+        customCursor.style.left = cursorX + 'px';
+        customCursor.style.top = cursorY + 'px';
 
         // Add trail dot
-        addTrailDot(e.clientX, e.clientY);
+        addTrailDot(cursorX, cursorY);
     });
 
+    // Animate Follower (smooth lerp)
+    function updateFollower() {
+        let dx = cursorX - followerX;
+        let dy = cursorY - followerY;
+        followerX += dx * 0.15;
+        followerY += dy * 0.15;
+        followerFollower();
+        requestAnimationFrame(updateFollower);
+    }
+    
+    function followerFollower() {
+        cursorFollower.style.left = followerX + 'px';
+        cursorFollower.style.top = followerY + 'px';
+    }
+    updateFollower();
+
     // Hover effects for links and buttons
-    const links = document.querySelectorAll('a, button, .theme-switch, #chatbot-fab');
-    links.forEach(link => {
-        link.addEventListener('mouseenter', () => {
-            customCursor.style.transform = 'translate(-50%, -50%) scale(2)';
-            customCursor.style.backgroundColor = isSuperman ? 'var(--secondary-color)' : 'var(--primary-color)';
+    const interactiveElements = document.querySelectorAll('a, button, .theme-switch, #chatbot-fab, input, textarea, label');
+    interactiveElements.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            customCursor.classList.add('cursor-hover');
+            cursorFollower.classList.add('cursor-hover');
         });
-        link.addEventListener('mouseleave', () => {
-            customCursor.style.transform = 'translate(-50%, -50%) scale(1)';
-            customCursor.style.backgroundColor = isSuperman ? 'var(--primary-color)' : 'var(--primary-color)';
+        el.addEventListener('mouseleave', () => {
+            customCursor.classList.remove('cursor-hover');
+            cursorFollower.classList.remove('cursor-hover');
         });
     });
 
     // Click effect (Burst)
     document.addEventListener('mousedown', (e) => {
-        customCursor.classList.add('click-effect');
-        setTimeout(() => customCursor.classList.remove('click-effect'), 200);
         createBurst(e.clientX, e.clientY, isSuperman);
     });
 
@@ -108,12 +132,14 @@ document.addEventListener('DOMContentLoaded', () => {
             this.life = 1;
             this.decay = Math.random() * 0.05 + 0.02;
 
-            // Themes: Superman has Red/Blue. Batman has Yellow/Dark Gray
             if (isSuperman) {
-                this.color = Math.random() > 0.5 ? '#ed1d24' : '#005b9f';
-                if (Math.random() > 0.8) this.color = '#ffc900';
+                // Superman color palette (Red, Blue, Gold/Yellow)
+                const rand = Math.random();
+                this.color = rand > 0.6 ? '#c41230' : (rand > 0.2 ? '#0a4a8f' : '#ffc900');
             } else {
-                this.color = Math.random() > 0.5 ? '#f0c330' : '#444444';
+                // Batman color palette (Yellow, Black/Dark, White)
+                const rand = Math.random();
+                this.color = rand > 0.5 ? '#f0c330' : (rand > 0.2 ? '#22223b' : '#ffffff');
             }
         }
 
@@ -128,12 +154,12 @@ document.addEventListener('DOMContentLoaded', () => {
             ctx.fillStyle = this.color;
             ctx.beginPath();
             if (!this.isSuperman) {
-                // Batman shape (simple triangle/bat approx)
+                // Batman shape (simple triangle/bat representation)
                 ctx.moveTo(this.x, this.y - this.size);
                 ctx.lineTo(this.x + this.size * 1.5, this.y + this.size);
                 ctx.lineTo(this.x - this.size * 1.5, this.y + this.size);
             } else {
-                // Superman shape (diamonds)
+                // Superman shape (diamonds/shield approximation)
                 ctx.moveTo(this.x, this.y - this.size);
                 ctx.lineTo(this.x + this.size, this.y);
                 ctx.lineTo(this.x, this.y + this.size);
@@ -151,7 +177,7 @@ document.addEventListener('DOMContentLoaded', () => {
             this.size = isSuperman ? 4 : 3;
             this.life = 1;
             this.decay = 0.05;
-            this.color = isSuperman ? 'rgba(237, 29, 36, 0.5)' : 'rgba(240, 195, 48, 0.4)';
+            this.color = isSuperman ? 'rgba(196, 18, 48, 0.4)' : 'rgba(240, 195, 48, 0.35)';
         }
         update() {
             this.life -= this.decay;
@@ -203,23 +229,167 @@ document.addEventListener('DOMContentLoaded', () => {
 
     animate();
 
+    // Brush Effect Tracking for Profile Pic
+    const profilePicsWrapper = document.querySelector('.profile-wrapper');
+    if (profilePicsWrapper) {
+        profilePicsWrapper.addEventListener('mousemove', (e) => {
+            const rect = profilePicsWrapper.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            profilePicsWrapper.style.setProperty('--mouse-x', `${x}px`);
+            profilePicsWrapper.style.setProperty('--mouse-y', `${y}px`);
+        });
+        profilePicsWrapper.addEventListener('mouseleave', () => {
+             profilePicsWrapper.style.setProperty('--mouse-x', `-200px`);
+             profilePicsWrapper.style.setProperty('--mouse-y', `-200px`);
+        });
+    }
+
     // Scroll Animation (Fade in elements)
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.style.opacity = 1;
-                entry.target.style.transform = 'translateY(0)';
+                entry.target.classList.add('visible');
             }
+        });
+    }, { threshold: 0.1 });
+
+    const hiddenElements = document.querySelectorAll('.reveal');
+    hiddenElements.forEach((el) => {
+        observer.observe(el);
+    });
+
+    // Navbar Scrolled style
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+        highlightNav();
+    });
+
+    // Highlight Navbar link on scroll
+    const sections = document.querySelectorAll('header, section');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    function highlightNav() {
+        let scrollPosition = window.scrollY + 200;
+
+        sections.forEach(section => {
+            if (scrollPosition >= section.offsetTop && scrollPosition < (section.offsetTop + section.offsetHeight)) {
+                let currentId = section.getAttribute('id');
+                // Adjust for #hero / #about mapping
+                if (currentId === 'hero') currentId = 'about';
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${currentId}`) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+        });
+    }
+
+    // Mobile Navbar Hamburger menu toggle
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('open');
+        navLinksList.classList.toggle('open');
+    });
+
+    // Close menu when clicking link
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            hamburger.classList.remove('open');
+            navLinksList.classList.remove('open');
         });
     });
 
-    const hiddenElements = document.querySelectorAll('.skill-card, .project-card, .leadership-card');
-    hiddenElements.forEach((el) => {
-        el.style.opacity = 0;
-        el.style.transform = 'translateY(30px)';
-        el.style.transition = 'all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-        observer.observe(el);
-    });
+    // Typing Animation
+    const roles = [
+        "Full Stack Web Platforms",
+        "Deep Learning Models",
+        "Embedded Systems",
+        "Scalable Architectures"
+    ];
+    let roleIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    const typingTextEl = document.getElementById('typing-text');
+
+    function type() {
+        const currentRole = roles[roleIndex];
+        
+        if (isDeleting) {
+            typingTextEl.textContent = currentRole.substring(0, charIndex - 1);
+            charIndex--;
+        } else {
+            typingTextEl.textContent = currentRole.substring(0, charIndex + 1);
+            charIndex++;
+        }
+
+        let typeSpeed = isDeleting ? 40 : 80;
+
+        if (!isDeleting && charIndex === currentRole.length) {
+            typeSpeed = 1500; // Pause at end of word
+            isDeleting = true;
+        } else if (isDeleting && charIndex === 0) {
+            isDeleting = false;
+            roleIndex = (roleIndex + 1) % roles.length;
+            typeSpeed = 300; // Pause before typing next word
+        }
+
+        setTimeout(type, typeSpeed);
+    }
+    
+    if (typingTextEl) {
+        type();
+    }
+
+    // Stats Counter Animation
+    const statNums = document.querySelectorAll('.stat-num');
+    let countersStarted = false;
+
+    function startCounters() {
+        statNums.forEach(stat => {
+            const target = parseFloat(stat.getAttribute('data-target'));
+            const isFloat = stat.classList.contains('cgpa-num');
+            let current = 0;
+            const duration = 2000; // ms
+            const stepTime = 30; // ms
+            const totalSteps = duration / stepTime;
+            const increment = target / totalSteps;
+
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                if (isFloat) {
+                    stat.textContent = current.toFixed(2);
+                } else {
+                    stat.textContent = Math.floor(current);
+                }
+            }, stepTime);
+        });
+    }
+
+    // Trigger counters when section is in view
+    const heroSection = document.getElementById('hero');
+    const heroObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !countersStarted) {
+                startCounters();
+                countersStarted = true;
+            }
+        });
+    }, { threshold: 0.1 });
+
+    if (heroSection) {
+        heroObserver.observe(heroSection);
+    }
 
     // ================================================================
     //  CHATBOT
@@ -242,79 +412,83 @@ document.addEventListener('DOMContentLoaded', () => {
     const KB = [
         {
             patterns: ['who are you', 'what are you', 'tell me about yourself', 'introduce', 'hello', 'hi', 'hey', 'start', 'namaste', 'howdy', 'greetings'],
-            response: "👋 Hey! I'm <strong>Pranesh V's</strong> personal AI assistant — built right into this portfolio! Ask me about his skills, projects, education, or how to get in touch. What would you like to know? 🦇"
+            response: "👋 Hey! I'm <strong>Pranesh V's</strong> personal AI assistant — built right into this portfolio! Ask me about his skills, projects, patents, experience, or how to get in touch. What would you like to know? 🦇"
         },
         {
-            patterns: ['education', 'college', 'university', 'b.tech', 'btech', 'degree', 'student', 'study', 'studying', 'institution', 'sbec', 'sengunthar'],
-            response: "🎓 Pranesh is a <strong>B.Tech Information Technology</strong> student. His coursework spans core CS, Big Data, AI/ML, Distributed Systems, and Cybersecurity — giving him a well-rounded technical foundation."
+            patterns: ['education', 'college', 'university', 'b.tech', 'btech', 'degree', 'student', 'study', 'studying', 'institution', 'vsb', 'sengunthar', 'hsc', 'sslc', 'school'],
+            response: "🎓 Pranesh is a B.Tech <strong>Information Technology</strong> student at <strong>V.S.B Engineering College</strong> (2023–2027) with a current CGPA of <strong>7.93</strong>. Coursework spans Data Structures & Algorithms, DBMS, Operating Systems, Computer Networks, Software Engineering, and Web Tech."
         },
         {
             patterns: ['skill', 'skills', 'tech stack', 'technologies', 'languages', 'know', 'expertise', 'specializ', 'proficient', 'capable'],
-            response: "🛠️ Here's Pranesh's arsenal:\n\n• <strong>Programming:</strong> Java (DSA — trees, linked lists, strings), Python\n• <strong>Big Data:</strong> Hadoop, HDFS, MapReduce, Lamport's & Ricart-Agrawala algorithms\n• <strong>AI/ML:</strong> Computer Vision, local model deployment (DeepSeek via Ollama)\n• <strong>Cybersecurity:</strong> Ethical Hacking with Kali Linux\n• <strong>Testing:</strong> Black/White box, path & performance testing"
+            response: "🛠️ Here's Pranesh's technical arsenal:\n\n• <strong>Languages:</strong> Python, Java, JavaScript, C, SQL\n• <strong>Web & Frameworks:</strong> React.js, Node.js, Express.js, HTML5, CSS3, REST APIs, WebSockets\n• <strong>AI & Data:</strong> Computer Vision, OpenCV, Deep Learning, RAG / LLMs, Hadoop, MapReduce, HDFS\n• <strong>Tools & Platforms:</strong> Git, GitHub, VS Code, Postman, Linux, Kali Linux, Arduino IDE\n• <strong>Embedded / IoT:</strong> ESP32, LoRa, GSM Modules"
         },
         {
-            patterns: ['java', 'python', 'programming', 'code', 'coding', 'language'],
-            response: "💻 Pranesh codes primarily in <strong>Java</strong> (with a deep focus on Data Structures & Algorithms — binary trees, linked lists, string manipulation) and <strong>Python</strong> (used extensively in AI/ML projects)."
+            patterns: ['java', 'python', 'javascript', 'sql', 'programming', 'code', 'coding', 'language'],
+            response: "💻 Pranesh is highly proficient in <strong>Python</strong> (used in AI, RAG, and CV projects) and <strong>Java</strong> (focusing heavily on DSA), followed by <strong>JavaScript</strong> for full-stack React/Node.js web development."
         },
         {
-            patterns: ['hadoop', 'mapreduce', 'hdfs', 'big data', 'distributed', 'lamport', 'ricart'],
-            response: "📦 Pranesh has hands-on experience with <strong>Hadoop, HDFS, and MapReduce</strong> for large-scale data processing. He also studied distributed algorithms like <strong>Lamport's Clocks</strong> and <strong>Ricart-Agrawala</strong> for mutual exclusion."
+            patterns: ['ai', 'machine learning', 'ml', 'computer vision', 'cv', 'deep', 'neural', 'model', 'ollama', 'deepseek', 'rag', 'vector'],
+            response: "🤖 AI, Machine Learning, and Computer Vision are Pranesh's core domains! He has built:\n\n• <strong>Hawk AI</strong> — Face recognition-based smart attendance using Smart Boards.\n• <strong>ClarifAI</strong> — A high-accuracy conference/event assistant using RAG (Retrieval-Augmented Generation) & Endee vector databases.\n• <strong>Space Debris Management System</strong> — Predictive analytics tracking debris orbits.\n• <strong>Project Shield</strong> — Embedded ML sensor alerts for grid break detection."
         },
         {
-            patterns: ['ai', 'machine learning', 'ml', 'computer vision', 'cv', 'deep', 'neural', 'model', 'ollama', 'deepseek'],
-            response: "🤖 AI & ML is one of Pranesh's strongest domains! He has built:\n\n• CV-powered automated classroom monitoring\n• Local AI model deployment with <strong>DeepSeek via Ollama</strong>\n• Guardian AI for traffic accident detection\n• AI Crop Recommendation system\n\nHe optimizes models for real hardware constraints."
+            patterns: ['patent', 'patents', 'filed', 'invention', 'inventions'],
+            response: "🏆 Pranesh has filed <strong>two Indian Patents</strong>:\n\n1. <strong>Space Debris Management System (2024):</strong> Computational orbital model utilizing predictive analytics to catalog and prevent satellite collisions.\n2. <strong>Hawk AI — Automated Attendance (2025):</strong> Smart board camera deep learning solution that automates attendance via real-time face recognition."
         },
         {
             patterns: ['cybersecurity', 'security', 'hacking', 'kali', 'ethical hacking', 'kali linux', 'ddos', 'phishing', 'attack'],
-            response: "🛡️ Pranesh has a solid Cybersecurity foundation:\n\n• <strong>Ethical Hacking</strong> using Kali Linux\n• Researched & proposed mitigation for <strong>DDoS & Phishing attacks</strong>\n• Software testing across black-box, white-box, path & performance methodologies"
+            response: "🛡️ Pranesh has expertise in <strong>Ethical Hacking</strong> and system audits using Kali Linux. He is experienced in analyzing cybersecurity vulnerabilities and designing robust network topologies."
+        },
+        {
+            patterns: ['internship', 'intern', 'experience', 'work', 'job', 'industry', 'wild bugs', 'freelancing', 'wildbugs', 'freelance'],
+            response: "💼 Pranesh's professional experience includes:\n\n• <strong>Freelance Web Developer at Wild Bugs (2025 - Present):</strong> Designed and developed their official interactive landing page (<a href='https://wild-bugs.vercel.app/' target='_blank' style='color:inherit;text-decoration:underline'>wild-bugs.vercel.app</a>) using React.js, Tailwind CSS, and Vercel.\n• <strong>Full Stack Development Intern (2024):</strong> Developed responsive web modules, built RESTful APIs, and worked with cross-functional teams in Agile workflows."
         },
         {
             patterns: ['project', 'projects', 'work', 'built', 'created', 'made', 'developed', 'what have you done'],
-            response: "🚀 Pranesh has built some impressive projects:\n\n1. <strong>InvestiGator</strong> — Multi-asset portfolio tracker + paper trader (Java, WebSockets, REST APIs)\n2. <strong>CV Monitoring System</strong> — AI-powered classroom attendance & engagement\n3. <strong>Project Shield / Grid Guardians</strong> — IoT + ML for LT line breakage detection (KSEBL)\n4. <strong>DeepFake Awareness</strong> — Research & presentations on AI ethics\n5. <strong>Smart EV Energy Optimizer</strong> — AI-driven EV sustainable energy system\n6. <strong>DDoS & Phishing Mitigation</strong> — Cybersecurity vulnerability analysis\n\nAsk me about any specific one! 🦇"
+            response: "🚀 Some of Pranesh's key projects include:\n\n1. <strong>Hawk AI</strong> — Smart Board face recognition attendance.\n2. <strong>Investigator</strong> — Multi-asset tracking and simulation dashboard with live APIs and AI mentor.\n3. <strong>ClarifAI</strong> — RAG semantic document query system.\n4. <strong>House</strong> — Immersive Harry Potter-themed competitive coding editor.\n5. <strong>Project Shield</strong> — IoT line breakage detection for disaster response.\n\nAsk me about any specific one! 🦇⚡"
         },
         {
-            patterns: ['investigator', 'investig', 'portfolio tracker', 'stock', 'crypto', 'mutual fund', 'paper trad', 'websocket'],
-            response: "📈 <strong>InvestiGator</strong> is a full-stack financial app Pranesh built:\n\n• Tracks <strong>Crypto, Stocks, Mutual Funds, Commodities & FDs</strong>\n• Includes a <strong>live-data paper trading simulator</strong>\n• Bridges personal wealth management with financial literacy\n• Built with Java, WebSockets, REST APIs, and Databases"
+            patterns: ['investigator', 'investig', 'portfolio tracker', 'stock', 'crypto', 'mutual fund', 'paper trad', 'websocket', 'mentor'],
+            response: "📈 <strong>Investigator</strong> is a React & Node.js platform enabling:\n\n• Multi-asset portfolio tracking (Stocks, Crypto, Mutual Funds, commodities).\n• Interactive dashboard performance visualizations via Chart.js.\n• Real-time investment simulation with live market data.\n• Contextual AI investment advice & risk assessments."
         },
         {
-            patterns: ['classroom', 'attendance', 'monitoring', 'cv monitoring', 'automated', 'computer vision', 'monitoring system'],
-            response: "🎥 <strong>CV & ML-Powered Automated Monitoring</strong>:\n\nPranesh is spearheading an AI system that uses Computer Vision and Machine Learning to:\n• Automate <strong>attendance tracking</strong>\n• Monitor <strong>classroom engagement</strong>\n\nThis project showcases his applied AI/ML skills at a production level."
+            patterns: ['hawk ai', 'hawk', 'attendance', 'monitoring', 'cv monitoring', 'automated', 'computer vision', 'monitoring system', 'smart board'],
+            response: "🎥 <strong>Hawk AI (Patent Filed 2025)</strong>:\n\nAn automated classroom monitoring system running entirely off existing smart board cameras with zero extra hardware. Uses convolutional neural networks (CNNs) for real-time face detection, recognition, and automated DB logs."
         },
         {
-            patterns: ['grid guardian', 'shield', 'esp32', 'iot', 'ksebl', 'line breakage', 'disaster', 'power'],
-            response: "⚡ <strong>Project Shield — Grid Guardians</strong>:\n\nAn intelligent disaster management platform built for <strong>KSEBL</strong> (Kerala State Electricity Board):\n• ESP32 IoT sensors for real-time field data\n• ML-based LT power line breakage detection\n• Automated emergency alerting system"
+            patterns: ['clarifai', 'clarif', 'rag', 'vector database', 'semantic search', 'event'],
+            response: "🔍 <strong>ClarifAI</strong> is a production-ready RAG application:\n\n• Acts as an event/conference coordinator AI assistant.\n• Employs an Endee vector database to index and search schedules, rulebooks, and FAQs.\n• Returns context-grounded, citation-mapped natural language replies with zero hallucinations."
         },
         {
-            patterns: ['deepfake', 'deep fake', 'fake', 'ethics', 'ai ethics', 'awareness', 'research'],
-            response: "🎭 <strong>DeepFake Awareness Project</strong>:\n\nPranesh conducted comprehensive research on DeepFake technology and delivered presentations on:\n• The <strong>ethical implications</strong> of AI-generated media\n• <strong>Responsible usage</strong> guidelines for AI tools\n• Societal impact of synthetic media"
+            patterns: ['house', 'potter', 'wizard', 'code editor', 'judge0', 'online judge'],
+            response: "🧙‍♂️ <strong>House</strong> is a dynamically themed Harry Potter competitive coding platform:\n\n• Fully immersive house-based selector (Gryffindor, Slytherin, etc.) with animated environments.\n• Real-time compiler integrating the Judge0 API.\n• Supports live leaderboards, contest timers, and lore-driven UX copywriting."
         },
         {
-            patterns: ['ev', 'electric vehicle', 'energy', 'smart energy', 'sustainable', 'optimizer'],
-            response: "🔋 <strong>Smart Energy Optimizer for EVs</strong>:\n\nPranesh engineered an AI-driven solution to:\n• <strong>Optimize energy consumption</strong> in electric vehicles\n• Focus on sustainable technology initiatives\n• Apply predictive AI models to real-world green tech"
+            patterns: ['project shield', 'shield', 'line breakage', 'ksebl', 'esp32', 'lora', 'gsm'],
+            response: "⚡ <strong>Project Shield (Grid Guardians)</strong>:\n\nAn intelligent disaster mitigation platform for electrical grids:\n• Integrates ESP32 microcontroller sensors.\n• Uses ML anomaly detection to report LT power line breaks instantly.\n• Features automated GSM/LoRa alerts and remote circuit safety isolation."
         },
         {
             patterns: ['leadership', 'leader', 'coordinator', 'sih', 'smart india hackathon', 'symposium', 'kanal', 'event', 'manage'],
-            response: "🏆 Pranesh has strong leadership credentials:\n\n• <strong>Dept. Coordinator — SIH (Smart India Hackathon)</strong>: Facilitated team formation, project ideation, and managed departmental operations for this national-level event.\n• <strong>Kanal'26 — Coordinator & Department Editor</strong>: Organized a technical symposium, demonstrating teamwork, event management, and leadership under pressure."
+            response: "🏆 Leadership highlights:\n\n• <strong>Department Coordinator — SIH (Smart India Hackathon):</strong> Facilitated communications, team matching, and project mentorship.\n• <strong>Coordinator & Editor — Kanal'26:</strong> Led operations and planning for this technical symposium under high pressure."
         },
         {
-            patterns: ['contact', 'email', 'reach', 'connect', 'hire', 'hiring', 'available', 'linkedin', 'github', 'social', 'leetcode', 'resume', 'cv'],
-            response: "📬 You can reach Pranesh through:\n\n• <a href='https://github.com/White-fang10' target='_blank' style='color:inherit;text-decoration:underline'>🐙 GitHub</a>\n• <a href='https://www.linkedin.com/in/pranesh-v-0451b0314' target='_blank' style='color:inherit;text-decoration:underline'>💼 LinkedIn</a>\n• <a href='https://leetcode.com/u/praneshvenkidusamy/' target='_blank' style='color:inherit;text-decoration:underline'>💻 LeetCode</a>\n• <a href='https://drive.google.com/file/d/1qC_5D1Uj1sW_ARTZdGv0n0olYie8w-Qt/view?usp=sharing' target='_blank' style='color:inherit;text-decoration:underline'>📄 View Resume</a>"
+            patterns: ['contact', 'email', 'reach', 'connect', 'hire', 'hiring', 'available', 'linkedin', 'github', 'social', 'leetcode', 'resume', 'cv', 'phone', 'mobile', 'call'],
+            response: "📬 Connect with Pranesh V:\n\n• 📧 <a href='mailto:esppranesh@gmail.com' style='color:inherit;text-decoration:underline'>esppranesh@gmail.com</a>\n• 📞 +91 8807149866\n• 🐙 <a href='https://github.com/White-fang10/Portfolio' target='_blank' style='color:inherit;text-decoration:underline'>GitHub</a>\n• 💼 <a href='https://www.linkedin.com/in/pranesh-v-0451b0314' target='_blank' style='color:inherit;text-decoration:underline'>LinkedIn</a>\n• 💻 <a href='https://leetcode.com/u/praneshvenkidusamy/' target='_blank' style='color:inherit;text-decoration:underline'>LeetCode</a>\n• 📄 <a href='https://drive.google.com/file/d/1g83NPNC1Ti2-DgVSGLEd9N0yW2lpXK8S/view?usp=drivesdk' target='_blank' style='color:inherit;text-decoration:underline'>View Resume</a>"
         },
         {
             patterns: ['github', 'repository', 'code', 'open source', 'repo'],
-            response: "🐙 Check out Pranesh's GitHub at <a href='https://github.com/White-fang10' target='_blank' style='color:inherit;text-decoration:underline'>github.com/White-fang10</a> — you'll find his project source code and contributions there!"
+            response: "🐙 Explore Pranesh's code at <a href='https://github.com/White-fang10/Portfolio' target='_blank' style='color:inherit;text-decoration:underline'>github.com/White-fang10/Portfolio</a>. You'll find source files for Investigator, ClarifAI, House, and more!"
         },
         {
             patterns: ['thank', 'thanks', 'thx', 'great', 'awesome', 'cool', 'nice', 'wow', 'perfect', 'good'],
-            response: "😊 You're welcome! Feel free to ask me anything else about Pranesh. He'd love to hear from you too — don't hesitate to reach out via LinkedIn or GitHub! 🦇⚡"
+            response: "😊 Happy to help! Feel free to ask me anything else about Pranesh, his patents, or his tech stacks. Don't hesitate to reach out to him via LinkedIn! 🦇⚡"
         },
         {
             patterns: ['bye', 'goodbye', 'see you', 'later', 'ciao', 'exit'],
-            response: "👋 Take care! If you ever want to know more about Pranesh's work, I'll be right here. 🦇"
+            response: "👋 Goodbye! Enjoy exploring the rest of Pranesh's portfolio. 🦇"
         }
     ];
 
-    const FALLBACK = "🤔 Hmm, I'm not sure about that one. Try asking about Pranesh's <strong>skills</strong>, <strong>projects</strong>, <strong>education</strong>, or <strong>contact info</strong>!";
+    const FALLBACK = "🤔 I'm not fully sure about that detail. Try asking about Pranesh's <strong>patents</strong>, <strong>skills</strong>, <strong>projects</strong>, <strong>internship</strong>, or how to <strong>contact</strong> him!";
 
     function findResponse(text) {
         const lower = text.toLowerCase();
@@ -379,7 +553,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!greeted) {
             greeted = true;
             setTimeout(() => {
-                appendMessage("👋 Hey! I'm <strong>Pranesh's AI assistant</strong>. Ask me about his projects, skills, or how to reach him!", 'bot');
+                appendMessage("👋 Hey! I'm <strong>Pranesh's AI assistant</strong>. Ask me about his projects, skills, patents, or how to reach him!", 'bot');
             }, 350);
         }
     }
@@ -387,11 +561,10 @@ document.addEventListener('DOMContentLoaded', () => {
     function closeChat() {
         chatWindow.classList.add('chatbot-hidden');
         chatOpen = false;
-        // Fly-away animation on FAB when closing
         chatFab.classList.remove('chat-fly-away');
         void chatFab.offsetWidth; // reflow to restart animation
         chatFab.classList.add('chat-fly-away');
-        setTimeout(() => chatFab.classList.remove('chat-fly-away'), 750);
+        setTimeout(() => chatFab.classList.remove('chat-fly-away'), 700);
     }
 
     chatFab.addEventListener('click', () => chatOpen ? closeChat() : openChat());
@@ -410,15 +583,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Sync avatar when theme toggles
     themeToggle.addEventListener('change', () => {
-        // Run after toggle has applied the class (slight delay)
         setTimeout(updateChatTheme, 650);
     });
 
     // Init avatar
     updateChatTheme();
 
-    // ---- Landing animation on page load ----
-    // Delay slightly so assets are ready
+    // Landing animation on page load
     setTimeout(() => {
         chatFab.style.opacity = '1';
         chatFab.classList.add('chat-landing');
@@ -429,21 +600,26 @@ document.addEventListener('DOMContentLoaded', () => {
     const chatbotInteractiveEls = [chatFab, chatClose, chatSend, ...chatChips.querySelectorAll('.chip')];
     chatbotInteractiveEls.forEach(el => {
         el.addEventListener('mouseenter', () => {
-            customCursor.style.transform = 'translate(-50%, -50%) scale(2)';
+            customCursor.classList.add('cursor-hover');
+            cursorFollower.classList.add('cursor-hover');
         });
         el.addEventListener('mouseleave', () => {
-            customCursor.style.transform = 'translate(-50%, -50%) scale(1)';
+            customCursor.classList.remove('cursor-hover');
+            cursorFollower.classList.remove('cursor-hover');
         });
     });
 
     // Ensure cursor is always visible when moving over the chat window
     chatWindow.addEventListener('mousemove', (e) => {
-        customCursor.style.left = e.clientX + 'px';
-        customCursor.style.top = e.clientY + 'px';
+        cursorX = e.clientX;
+        cursorY = e.clientY;
+        customCursor.style.left = cursorX + 'px';
+        customCursor.style.top = cursorY + 'px';
     });
     chatFab.addEventListener('mousemove', (e) => {
-        customCursor.style.left = e.clientX + 'px';
-        customCursor.style.top = e.clientY + 'px';
+        cursorX = e.clientX;
+        cursorY = e.clientY;
+        customCursor.style.left = cursorX + 'px';
+        customCursor.style.top = cursorY + 'px';
     });
-
 });
